@@ -20,7 +20,7 @@ def animateCoins(dt):
    del coins[i]
    return
   coins[i].y += 1
-  coins[i].opacity -= 3
+  coins[i].opacity -= 4
 
 @window.event
 def on_draw():
@@ -30,14 +30,14 @@ def on_draw():
   coin.draw()
 
 @window.event
-def on_mouse_press(a,b,c,d):
+def on_mouse_press(mouseX,mouseY,button,modifiers):
  global clickCount
  clickCount += 1
  clicks.text = "Clicks: " + str(clickCount)
  sound.play()
  coins.append(pyglet.sprite.Sprite(
   img=coin,
-  x=a, y=b))
+  x=mouseX, y=mouseY))
 
 pyglet.clock.schedule_interval(animateCoins, 1/120.0)
 

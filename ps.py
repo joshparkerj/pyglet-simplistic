@@ -15,24 +15,24 @@ spinCoin = pyglet.image.ImageGrid(pyglet.image.load('coin.png'), 6, 1)
 coin = pyglet.image.Animation.from_image_sequence(spinCoin,1/24.0)
 coins = []
 
-"""coin rises and fades"""
 def animate_coins():
+    """coin rises and fades"""
     for coin in coins:
         coin.y += 1
         coin.opacity -= 4
     coins[:] = [coin for coin in coins if coin.opacity > 0]
 
-"""what to show in the window"""
 @window.event
 def on_draw():
+    """what to show in the window"""
     treasure.draw()
     clicks.draw()
     for coin in coins:
         coin.draw()
 
-"""count the clicks"""
 @window.event
 def on_mouse_press(mouse_x,mouse_y):
+    """count the clicks"""
     global CLICK_COUNT
     CLICK_COUNT += 1
     clicks.text = "Clicks: " + str(CLICK_COUNT)

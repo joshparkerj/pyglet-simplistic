@@ -17,12 +17,10 @@ coins = []
 
 """coin rises and fades"""
 def animate_coins():
-    for i in range(len(coins)):
-        if coins[i].opacity <= 0:
-            del coins[i]
-            return
-        coins[i].y += 1
-        coins[i].opacity -= 4
+    for coin in coins:
+        coin.y += 1
+        coin.opacity -= 4
+    coins[:] = [coin for coin in coins if coin.opacity > 0]
 
 """what to show in the window"""
 @window.event

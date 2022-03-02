@@ -12,7 +12,7 @@ clicks = pyglet.text.Label(text="Clicks: " + str(CLICK_COUNT), x=5, y=345)
 sound = pyglet.resource.media('cash.wav', streaming=False)
 
 spinCoin = pyglet.image.ImageGrid(pyglet.image.load('coin.png'), 6, 1)
-coin = pyglet.image.Animation.from_image_sequence(spinCoin,1/24.0)
+coin_image = pyglet.image.Animation.from_image_sequence(spinCoin,1/24.0)
 coins = []
 
 def animate_coins():
@@ -38,7 +38,7 @@ def on_mouse_press(mouse_x,mouse_y):
     clicks.text = "Clicks: " + str(CLICK_COUNT)
     sound.play()
     coins.append(pyglet.sprite.Sprite(
-        img=coin,
+        img=coin_image,
         x=mouse_x, y=mouse_y))
 
 pyglet.clock.schedule_interval(animate_coins, 1/120.0)

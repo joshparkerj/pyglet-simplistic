@@ -1,5 +1,6 @@
 """simple pyglet demo"""
 import pyglet
+from dataclasses import dataclass
 
 window = pyglet.window.Window(480,360)
 
@@ -13,11 +14,11 @@ spinCoin = pyglet.image.ImageGrid(pyglet.image.load('coin.png'), 6, 1)
 coin_image = pyglet.image.Animation.from_image_sequence(spinCoin,1/24.0)
 coins = []
 
+@dataclass
 class CountClicks:
-    """Class encapsulates click count"""
-    def __init__(self):
-        self.click_count = 0
-
+    """encapsulates click count"""
+    click_count: int = 0
+    
     def count(self):
         """increment click count and learn what it is"""
         self.click_count += 1

@@ -44,7 +44,11 @@ def on_draw():
 @window.event
 def on_mouse_press(mouse_x,mouse_y, button, modifiers):
     """count the clicks"""
-    if button == pyglet.window.mouse.LEFT and modifiers & ~pyglet.window.key.MOD_NUMLOCK & ~pyglet.window.key.MOD_CAPSLOCK & ~pyglet.window.key.MOD_SCROLLLOCK == 0:
+    if button == pyglet.window.mouse.LEFT \
+        and modifiers \
+            & ~pyglet.window.key.MOD_NUMLOCK \
+            & ~pyglet.window.key.MOD_CAPSLOCK \
+            & ~pyglet.window.key.MOD_SCROLLLOCK == 0:
         clicks.text = "Clicks: " + str(count_clicks.count())
         sound.play()
         coins.append(pyglet.sprite.Sprite(

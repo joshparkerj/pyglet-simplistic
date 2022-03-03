@@ -26,10 +26,10 @@ class CountClicks:
 
 count_clicks = CountClicks()
 
-def animate_coins():
+def animate_coins(time_interval):
     """coin rises and fades"""
     for coin in coins:
-        coin.y += 1
+        coin.y += 120.0 * time_interval
         coin.opacity -= 4
     coins[:] = [coin for coin in coins if coin.opacity > 0]
 
@@ -42,13 +42,14 @@ def on_draw():
         coin.draw()
 
 @window.event
-def on_mouse_press(mouse_x,mouse_y):
+def on_mouse_press(mouse_x,mouse_y, button, modifiers):
     """count the clicks"""
-    clicks.text = "Clicks: " + str(count_clicks.count())
-    sound.play()
-    coins.append(pyglet.sprite.Sprite(
-        img=coin_image,
-        x=mouse_x, y=mouse_y))
+    if button == pyglet.window.mouse.LEFT and modifiers & ~pyglet.window.key.MOD_NUMLOCK & ~pyglet.window.key.MOD_CAPSLOCK & ~pyglet.window.key.MOD_SCROLLLOCK == 0:
+        clicks.text = "Clicks: " + str(count_clicks.count())
+        sound.play()
+        coins.append(pyglet.sprite.Sprite(
+            img=coin_image,
+            x=mouse_x, y=mouse_y))
 
 pyglet.clock.schedule_interval(animate_coins, 1/120.0)
 

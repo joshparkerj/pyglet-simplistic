@@ -43,7 +43,7 @@ def on_draw():
 @window.event
 def on_mouse_press(mouse_x,mouse_y):
     """count the clicks"""
-    clicks.text = "Clicks: " + str(count_clicks.click_count())
+    clicks.text = "Clicks: " + str(count_clicks.count())
     sound.play()
     coins.append(pyglet.sprite.Sprite(
         img=coin_image,

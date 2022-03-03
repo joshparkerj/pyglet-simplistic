@@ -16,11 +16,12 @@ coins = []
 class CountClicks:
     """Class encapsulates click count"""
     def __init__(self):
-        self.count = 0
+        self.click_count = 0
 
     def count(self):
-        self.count += 1
-        return self.count
+        """increment click count and learn what it is"""
+        self.click_count += 1
+        return self.click_count
 
 count_clicks = CountClicks()
 
@@ -42,7 +43,7 @@ def on_draw():
 @window.event
 def on_mouse_press(mouse_x,mouse_y):
     """count the clicks"""
-    clicks.text = "Clicks: " + str(count_clicks.count())
+    clicks.text = "Clicks: " + str(count_clicks.click_count())
     sound.play()
     coins.append(pyglet.sprite.Sprite(
         img=coin_image,

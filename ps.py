@@ -1,6 +1,6 @@
 """simple pyglet demo"""
-import pyglet
 from dataclasses import dataclass
+import pyglet
 
 window = pyglet.window.Window(480,360)
 
@@ -18,7 +18,7 @@ coins = []
 class CountClicks:
     """encapsulates click count"""
     click_count: int = 0
-    
+
     def count(self):
         """increment click count and learn what it is"""
         self.click_count += 1

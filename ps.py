@@ -5,22 +5,24 @@ window = pyglet.window.Window(480,360)
 
 treasure = pyglet.sprite.Sprite(img=pyglet.resource.image('riches.png'))
 
-clicks = pyglet.text.Label(text="Clicks: " + str(CLICK_COUNT), x=5, y=345)
+clicks = pyglet.text.Label(text="Clicks: 0", x=5, y=345)
 
 sound = pyglet.resource.media('cash.wav', streaming=False)
 
 spinCoin = pyglet.image.ImageGrid(pyglet.image.load('coin.png'), 6, 1)
-coin = pyglet.image.Animation.from_image_sequence(spinCoin,1/24.0)
+coin_image = pyglet.image.Animation.from_image_sequence(spinCoin,1/24.0)
 coins = []
 
-def count_clicks_closure():
-    click_count = 0
-    def counter_function():
-        click_count += 1
-        return click_count
-    return counter_function
+class CountClicks:
+    """Class encapsulates click count"""
+    def __init__(self):
+        self.count = 0
 
-count_clicks = count_clicks_closure()
+    def count(self):
+        self.count += 1
+        return self.count
+
+count_clicks = CountClicks()
 
 def animate_coins():
     """coin rises and fades"""
@@ -40,10 +42,10 @@ def on_draw():
 @window.event
 def on_mouse_press(mouse_x,mouse_y):
     """count the clicks"""
-    clicks.text = "Clicks: " + str(count_clicks())
+    clicks.text = "Clicks: " + str(count_clicks.count())
     sound.play()
     coins.append(pyglet.sprite.Sprite(
-        img=coin,
+        img=coin_image,
         x=mouse_x, y=mouse_y))
 
 pyglet.clock.schedule_interval(animate_coins, 1/120.0)
